@@ -8,7 +8,7 @@
 ## Install Java, maven On Ubuntu
 ```bash
 sudo apt update -y
-apt install openjdk-17-jdk
+apt install openjdk-17-jdk -y
 # If any issuws wrt brken
 apt --fix-broken install
 cd /opt/
