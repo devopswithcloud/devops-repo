@@ -15,7 +15,7 @@ cd /opt/
 #wget https://dlcdn.apache.org/maven/maven-3/3.8.7/binaries/apache-maven-3.8.7-bin.tar.gz
 wget https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
 tar -xzvf apache-maven-3.8.8-bin.tar.gz
-export PATH=$PATH:/opt/apache-maven-3.8.7/bin
+export PATH=$PATH:/opt/apache-maven-3.8.8/bin
 mvn --version
 
 
