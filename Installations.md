@@ -60,7 +60,7 @@ vi /etc/profile
   export PATH=$PATH:/opt/apache-maven-3.8.8/bin
   export M2_HOME=/opt/apache-maven-3.8.8
 
-source ~/etc/profile
+source /etc/profile
 mvn --version
 ```
 
