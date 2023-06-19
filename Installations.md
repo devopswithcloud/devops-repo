@@ -64,7 +64,7 @@ source /etc/profile
 mvn --version
 ```
 
-## Install Java on Centos
+## Install Java 1.8 on Centos
 ### Oracle Java
 ```bash
 #Login as a root user
