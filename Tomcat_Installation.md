@@ -27,7 +27,7 @@ wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.76/bin/apache-tomcat-9.0.76.z
 yum install unzip -y
 
 unzip apache-tomcat-9.0.76.zip
-mv apache-tomcat-9.0.76/ tomcat9/
+mv apache-tomcat-9.0.76/ /opt/tomcat9/
 
 # to check the tomcat process u can use either of one 
 ps -ef | grep -i java*
@@ -52,8 +52,55 @@ ln -s /opt/tomcat9/bin/shutdown.sh /usr/bin/stopTomcat
 #now execute startTomcat to start and stopTomcat to stop from anywhere in the machine
 
 ```
-* Once the tomcat is started , tomcat can be accessible at `http://ipaddress:8080` 
 
+
+## Accesing tomcat 
+* Once the tomcat is started , tomcat can be accessible at `http://ipaddress:8080`
+* CLick on Manager, by defualt we will be getting `403`
+* If we want to give acces to the manager app, perform the below steps
+```bash
+cd /opt/tomcat9/webapps/manager/META-INF
+vi context.xml
+# comment the below line 
+ <!--
+  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+  -->
+# Save the file and come out
+```
+* Try to access the manager app from ui.
+* Few time it might still be havong `403`, clera the cache (ctrl+shift+delete)
+* After clicking on Manage app,it is asking for Credentials, which we ahvent created till now.
+* Perform the followitng steps to create a user and access through tomcat
+```bash
+vi /opt/tomcat9/conf/tomcat-users.xml
+
+# add this line at the end of the file
+<user username="sivaacademy" password="Devops@12345" roles="manager-gui,admin-gui"/>
+```
+* `manager-gui` ====> we will be having server status and manager app access
+* `admin-gui`   ====> Host Manager 
+
+* CLick on Host- Manager, by defualt we will be getting `403`
+* If we want to give acces to the host-manager app, perform the below steps
+```bash
+cd /opt/tomcat9/webapps/host-manager/META-INF
+vi context.xml
+# comment the below line 
+ <!--
+  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" />
+  -->
+# Save the file and come out
+```
+## Change Port:
+* If we want to change the port of tomcat, do the following steps:
+```bash
+vi /opt/tomcat/conf/server.xml
+
+modifyy port to 8085
+```
+* If we perform any changes in `server.xml` , we need to restart tomcat.
 
 
 
