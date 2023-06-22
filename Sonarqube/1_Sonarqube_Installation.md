@@ -56,4 +56,20 @@ useradd sonar
 
 #visudo
 sonar           ALL=(ALL)       NOPASSWD: ALL
+chown -R sonar:sonar /opt/sonarqube-9.7
+chmod -R 775 /opt/sonarqube-9.7
+
+# Switch user to sonar
+su - sonar
+cd /opt/sonarqube-9.7
+cd bin
+cd linux-x86-64/
+sh sonar.sh start
+
+# To Verify status of sonarqube
+sh sonar.sh status
 ```
+* Once the installation is successful, sonarqube can be acessible at port `9000`
+* It will ask for userid/passwd.
+  * By default sonarqube has created as userid as `admin` and password as `admin`
+  * Popup appears to change the password. Do change it and makesure u remember the password, as its difficult to get it back.
