@@ -53,3 +53,17 @@ sudo systemctl enable nexus
 sudo systemctl start nexus
 ```
 * Access the Nexus server from at `http://IPAddress/Hostname:8081/`
+
+### Login to Nexus 
+```bash
+# Admin user password is located in 
+/opt/sonatype-work/nexus3/admin.password
+```
+
+### Change Port
+```bash
+# vim  /opt/nexus/etc/nexus-default.properties
+change the port
+[root@nexusserver etc]# service nexus restart
+```
+s
