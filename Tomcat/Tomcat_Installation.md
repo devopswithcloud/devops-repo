@@ -34,6 +34,7 @@ ps -ef | grep -i java*
 or
 ps -ef | grep -i apache*
 
+cd /opt/tomcat9/bin/
 # To start the process, got to bin folder and execute the below command
 chmod +x *
 sh startup.sh 
