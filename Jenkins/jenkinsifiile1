@@ -1,0 +1,23 @@
+// First pipeline code 
+pipeline {
+   agent any
+   stages {
+    stage ('Welcome'){
+        steps {
+            //sh ''
+            //println 
+            // bat 
+            echo "Welcome to jenkins Pipleine Mastery"
+        }
+    }
+   }
+}
+
+
+/*
+node {
+    // scripted 
+}
+
+@Library // Shared Library
+*/
