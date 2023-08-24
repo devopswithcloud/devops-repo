@@ -8,6 +8,9 @@ gcloud compute instances create ansible-centos-host --zone=us-west4-b --machine-
 
 # Create a Ansible Ubuntu node
 gcloud compute instances create ansible-ubuntu-host --zone=us-west4-b --machine-type=e2-medium --create-disk=auto-delete=yes,boot=yes,device-name=ansible-ubuntu-host,image=projects/ubuntu-os-cloud/global/images/ubuntu-2004-focal-v20230817,mode=rw,size=20
+
+# Create a Ansible Ubuntu node
+gcloud compute instances create ansible-ubuntu-host-new --zone=us-west4-b --machine-type=e2-medium --create-disk=auto-delete=yes,boot=yes,device-name=ansible-ubuntu-host,image=projects/ubuntu-os-cloud/global/images/ubuntu-2004-focal-v20230817,mode=rw,size=20
 ```
 
 

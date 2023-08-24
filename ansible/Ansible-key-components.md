@@ -9,7 +9,7 @@
 * `Play`: Play will consists of multiple tasks. 
 * `playbooks`: Playbooks consists of one or more plays. 
 
-## Ansile Workflow:
+## Ansible Workflow:
 * Ideally we use ansible to deploy applciations.
 * Deploying an applications means excecuting a sequence of steps. 
 * Firstly, take a note of all the manual steps that are required and get the equivalent `module` from ansible. 
@@ -41,4 +41,19 @@ sudo apt install apache2  -y
 ```bash
 # Inform ansible to ensure repo is updated,  apache2 is installed
 ansible -b -i ubuntuhost -m apt -a "name=apache2 state=present update_cache=yes" all
+```
+* If we have to run the same file in yaml format
+```yaml
+# apache-play.yaml
+---
+- name: Installing apache server
+  become: yes
+  hosts: all
+  tasks:
+  - name: install apache2
+    apt:
+      name: apache2
+      state: present
+      update_cache: yes
+# ansible-playbook -i hosts apache-play.yaml
 ```
