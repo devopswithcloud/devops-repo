@@ -1,0 +1,19 @@
+# Install webserver on host
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Install Apache httpd
+    yum:
+      name: httpd
+      state: present
+  - name: Start the service
+    service: 
+      name: httpd
+      enabled: true
+      state: started
+  - name: Copy the html file 
+    copy: 
+      src: index.html
+      dest: /var/www/html/index.html
+    

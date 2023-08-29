@@ -1,0 +1,47 @@
+# Install webserver on host
+---
+- hosts: all
+  become: true
+  vars: 
+    courseName: Kubernetes
+    batchNumber: 10
+  tasks:
+  - name: Install Apache httpd
+    yum:
+      name: httpd
+      state: present
+  - name: Start the service
+    service: 
+      name: httpd
+      enabled: true
+      state: started
+  - name: Copy the html file 
+    copy: 
+      src: index.html
+      dest: /var/www/html/index.html
+    
+# When we run the above playbook, the variables will be displayed as output,
+# This is because, copy module will not update the variables, 
+# Instead of copy module, we can use template modeule, if we want to have dynamic data 
+
+---
+- hosts: all
+  become: true
+  vars: 
+    courseName: Kubernetes
+    batchNumber: 10
+  tasks:
+  - name: Install Apache httpd
+    yum:
+      name: httpd
+      state: present
+  - name: Start the service
+    service: 
+      name: httpd
+      enabled: true
+      state: started
+  - name: Copy the html file 
+    template:  # previously copy
+      src: index.html
+      dest: /var/www/html/index.html
+

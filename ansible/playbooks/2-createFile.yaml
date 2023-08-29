@@ -1,0 +1,10 @@
+# create a file using file module
+---
+- hosts: all
+  tasks:
+  - name: create file
+    file: 
+      path: /tmp/file.txt
+      owner: ansible
+      state: touch
+      mode: 0777

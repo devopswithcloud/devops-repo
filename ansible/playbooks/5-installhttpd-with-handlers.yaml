@@ -1,0 +1,28 @@
+---
+- hosts: all
+  become: true
+  vars: 
+    courseName: Kubernetes
+    batchNumber: 10
+  tasks:
+  - name: Install Apache httpd
+    yum:
+      name: httpd
+      state: present
+  - name: Copy the html file 
+    template:  # previously copy
+      src: index.html
+      dest: /var/www/html/index.html
+    notify: 
+    - Restart the service 
+  handlers:
+  - name: Restart the service 
+    service: 
+      name: httpd
+      enabled: true
+      state: restarted
+
+# We can use a module as handlers
+# Handlers are a special taks which will be running at the end of the play been notified by another task
+
+
