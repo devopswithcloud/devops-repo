@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: true
+  tasks: 
+  - name: Install Multiple packages
+    yum: 
+      name: ['git', 'unzip', 'tree', 'wget']
+      state: present

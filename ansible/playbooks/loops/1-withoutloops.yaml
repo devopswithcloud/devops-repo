@@ -1,0 +1,18 @@
+# without loops, 
+# git , unzip,  tree
+---
+- hosts: all
+  become: true 
+  tasks: 
+  - name: Install Git 
+    yum: 
+      name: git
+      state: present
+  - name: Install tree
+    yum: 
+      name: tree
+      state: present
+  - name: Install Unzip
+    yum: 
+      name: unzip 
+      state: present

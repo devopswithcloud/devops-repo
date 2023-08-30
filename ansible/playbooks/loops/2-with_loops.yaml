@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  tasks: 
+  - name: Install Multiple packages
+    yum: 
+      name: "{{item}}"
+      state: present
+    with_items:
+    - git
+    - unzip
+    - tree
+

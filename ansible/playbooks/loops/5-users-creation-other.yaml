@@ -1,0 +1,11 @@
+---
+- host: all 
+  become: true
+  tasks: 
+  - name: Create users
+    user: # Module 
+      name: "{{item.name}}"
+      create_home: "{{item.createhome}}"
+    with_items:
+    - {'name': 'indu', 'createhome': no}
+    - {'name': 'krish', 'createhome': yes}
