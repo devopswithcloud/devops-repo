@@ -104,3 +104,29 @@ ansible-playbook -i ../inventory dynamicinstall.yaml -extra-vars env=prod
       enabled: true
       state: restarted
 ```
+
+## Group Variables
+* Creata a yaml file in `/etc/ansible/group_vars/GROUPNAME`
+* Create a groupname under `/etc/ansible/hosts` file
+```bash
+[appserver]
+10.2.3.5 # this is the ip of the node
+```
+* `sudo mkdir /etc/ansible/group_vars`
+* `vi /etc/ansible/group_vars/appserver.yaml`
+```bash
+key: value
+```
+### Create a playbook to install java package
+```yaml
+# vi install_java.yaml
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Install java on node
+    yum: 
+      name: "{{javaVersion}}" # java package name >>>> java-11-openjdk.x86_64
+  - name: Get the java version
+    shell: java -version
+```

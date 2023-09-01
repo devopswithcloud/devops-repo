@@ -1,0 +1,18 @@
+---
+- hosts: all # we can keep individual ips 
+  become: true
+  tasks:
+  - name: Install webserver on node
+    yum: 
+      name: httpd
+      state: present
+    when: ansible_os_family == "Redhat" # git.stdout != ""
+  - name: Install apache 
+    apt: 
+      name: apache2
+      state: present
+      update_cache: true
+    when: ansible_os_family == "Debian"
+    
+
+  

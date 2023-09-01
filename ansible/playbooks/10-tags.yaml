@@ -1,0 +1,30 @@
+# if i want to run a specific task in a playbook , we can use  tags
+---
+- hosts: all
+  become: true
+  vars: 
+    courseName: Kubernetes
+    batchNumber: 10
+  tasks:
+  - name: Install Apache httpd
+    tags: 
+    - install
+    yum:
+      name: httpd
+      state: present
+  - name: Start the service
+    tags:
+    - start
+    service: 
+      name: httpd
+      enabled: true
+      state: started
+  - name: Copy the html file 
+    tags: 
+    - copy
+    template:  # previously copy
+      src: index.html
+      dest: /var/www/html/index.html
+
+# ansible-playbook -i inv taks.yaml --list-tags
+# ansible-playbook -i inv taks.yaml --tags 'copy'
