@@ -1,0 +1,47 @@
+# This play helps to install node , npm on the server
+--- 
+- name: Install node and npm
+  become: yes
+  hosts: all 
+  tasks:
+  - name: Update the repo and cache 
+    apt: 
+      update_cache: true
+      force_apt_get: yes
+      cache_valid_time: 3600 # If we execute update immediately after we ran once, it wont run update command. 
+      # this update will be done after 3600 seconds, before initial update. 
+      # apt-get update 
+  - name: Install nodejs and npm
+    ansible.builtin.apt:
+      pkg:
+        - nodejs
+        - npm 
+- name: Deploy nodejs app
+  become: yes
+  hosts: all 
+  tasks:
+  - name: Copy the artifact to the node server 
+    copy: 
+      src: /home/ansible/0609/node-ex.tar
+      dest: /home/ansible/node-ex.tar
+  - name: unarchive the tar file
+    ansible.builtin.unarchive:
+      src: /home/ansible/node-ex.tar
+      dest: /home/ansible
+      remote_src: yes
+  - name: Install the dependencies
+    npm: 
+      path: /home/ansible/node-ex
+  - name: Start the application # node app/server.js
+    command: node /home/ansible/node-ex/server # shell 
+    async: 1000
+    poll: 0
+  - name: Verify App is running
+    shell: ps aux | grep  node
+    # Shell and command are both the same. 
+    # But shell module will execute the commands in the shell
+    # If we want to use pipe |, redirections ">" "<", bolleand "&&" "||", env-vars, $HOME, we should be using shell 
+    # Command is more secure .
+    # command, shell are teh last priority options
+    register: app_status # user friendly name
+  - debug: msg={{app_status.stdout_lines}}

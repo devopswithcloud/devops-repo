@@ -1,0 +1,12 @@
+{
+    "name": "Nodejs project",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "engines": {
+        "node": "10.x.x"
+    }
+}
+
+
+
