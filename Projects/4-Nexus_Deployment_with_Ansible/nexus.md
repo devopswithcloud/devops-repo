@@ -4,4 +4,11 @@
 
 
 ## `Final Output`:
-* When i use the public ip of the vm and access the ip at port 8081 from the browser, i should be able to open nexus. 
+* When i use the public ip of the vm and access the ip at port 8081 from the browser, i should be able to open nexus.
+
+
+
+
+
+
+
