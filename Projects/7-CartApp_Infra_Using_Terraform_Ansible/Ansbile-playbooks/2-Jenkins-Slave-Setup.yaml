@@ -1,0 +1,41 @@
+---
+- hosts: jenkins-slave
+  become: true
+  tasks:
+  - name: Update Ubuntu Repository
+    apt: 
+      update_cache: yes
+      cache_valid_time: 3600
+  - name: install java
+    apt: 
+      name: openjdk-11-jre
+      state: present
+  - name: Download Maven Package
+    get_url: 
+      url: https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+      dest: /opt
+  - name: Extract Maven Packeges
+    unarchive: 
+      src: /opt/apache-maven-3.8.8-bin.tar.gz
+      dest: /opt
+      remote_src: yes
+  - name: Create /home/ubuntu/jenkins folder
+    file:
+      path: /home/ubuntu/jenkins
+      owner: ubuntu
+      group: ubuntu
+      mode: '0755'
+      state: directory
+  - name: Download OpenJDK 17
+    get_url:
+      url: https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
+      dest: /opt
+  - name: Extract java17 packages
+    unarchive:
+      src: /opt/openjdk-17.0.2_linux-x64_bin.tar.gz
+      dest: /opt
+      remote_src: yes
+  - name: Move to JDK17
+    command: mv /opt/jdk-17.0.2 /opt/jdk17
+    args: 
+      creates: /opt/jdk17

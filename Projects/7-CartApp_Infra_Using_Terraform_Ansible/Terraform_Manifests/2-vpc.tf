@@ -74,6 +74,13 @@ resource "aws_security_group" "tf_sg_new" {
     protocol = "tcp"
     cidr_blocks = [var.public_ip]
   }
+    ingress  {
+    description = "Allow 9000"
+    from_port = 9000
+    to_port = 9000
+    protocol = "tcp"
+    cidr_blocks = [var.public_ip]
+  }
   # in console, there is no need to create egress/outbound explicitly
   # but in terraform we need to mention the outbound as well
   egress {

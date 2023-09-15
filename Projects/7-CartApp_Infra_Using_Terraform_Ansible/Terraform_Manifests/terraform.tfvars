@@ -11,12 +11,17 @@ instances_configs = {
     }
     jenkins-slave = {
         amiid = "ami-053b0d53c279acc90"
-        instance_type = "t2.micro" 
+        instance_type = "t2.micro" #"t3.medium" 
         key_name = "project-key"
     }
     ansible = {
         amiid = "ami-053b0d53c279acc90"
         instance_type = "t2.micro" 
+        key_name = "project-key"
+    }
+    sonarqube = {
+        amiid = "ami-053b0d53c279acc90"
+        instance_type = "t3.medium" 
         key_name = "project-key"
     }
 }

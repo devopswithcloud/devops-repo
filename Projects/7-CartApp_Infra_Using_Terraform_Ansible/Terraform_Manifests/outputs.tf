@@ -12,6 +12,15 @@ output "instance_ips" {
     ansible = {
         public_ip = aws_instance.tf-ec2["ansible"].public_ip
         private_ip = aws_instance.tf-ec2["ansible"].private_ip 
+    },
+    sonarqube = {
+        public_ip = aws_instance.tf-ec2["sonarqube"].public_ip
+        private_ip = aws_instance.tf-ec2["sonarqube"].private_ip 
     }
   }
+
 }
+
+// These are ephemiral ipss
+
+// Modify the script to get the static ips, rather than epemeral ips ???

@@ -11,6 +11,28 @@ resource "aws_instance" "tf-ec2" {
   tags = {
     "Name" = "${each.key}"
   }
+  connection {
+    type = "ssh"
+    user = "ubuntu"
+    host = self.public_ip
+    private_key = file("project-key.pem")
+  }
+  provisioner "file" {
+    source = each.key == "ansible" ? "ansible.sh" : "empty.sh"            #ansible.sh
+    destination = each.key == "ansible" ? "/home/ubuntu/ansible.sh" : "/home/ubuntu/empty.sh"                  #/home/ubuntu/ansible.sh
+  }
+
+  provisioner "remote-exec" {
+    inline = [ 
+      each.key == "ansible" ? "chmod +x /home/ubuntu/ansible.sh && sh /home/ubuntu/ansible.sh" : "echo 'skipped command'"
+     ]
+    # chmod +x /home/ubuntu/ansible.sh && sh /home/ubuntu/ansible.sh
+  }
+
+  provisioner "file" {
+    source = "project-key.pem"
+    destination = "/home/ubuntu/project-key.pem"
+  }
   # ansible ====> ansible install should happen
 }
 

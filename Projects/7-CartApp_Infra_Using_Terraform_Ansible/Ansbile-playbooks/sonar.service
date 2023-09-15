@@ -1,0 +1,22 @@
+ansible@ansiblecontroller-2 ~]$ cat sonar.service 
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=sonar
+PermissionsStartOnly=true
+ExecStart=/opt/sonarqube971/bin/linux-x86-64/sonar.sh start
+ExecStop=/opt/sonarqube971/bin/linux-x86-64/sonar.sh stop
+ExecReload=/opt/sonarqube971/bin/linux-x86-64/sonar.sh restart
+PIDFile=/opt/sonarqube971/bin/linux-x86-64/./SonarQube.pid
+StandardOutput=syslog
+LimitNOFILE=131072
+LimitNPROC=8192
+TimeoutStartSec=5
+Restart=always
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
