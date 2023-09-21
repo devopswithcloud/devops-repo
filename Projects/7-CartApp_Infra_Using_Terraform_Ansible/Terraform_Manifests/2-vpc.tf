@@ -81,6 +81,7 @@ resource "aws_security_group" "tf_sg_new" {
     protocol = "tcp"
     cidr_blocks = [var.public_ip]
   }
+  
   # in console, there is no need to create egress/outbound explicitly
   # but in terraform we need to mention the outbound as well
   egress {

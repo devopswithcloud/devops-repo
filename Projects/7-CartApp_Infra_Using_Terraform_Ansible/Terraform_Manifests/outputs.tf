@@ -16,6 +16,10 @@ output "instance_ips" {
     sonarqube = {
         public_ip = aws_instance.tf-ec2["sonarqube"].public_ip
         private_ip = aws_instance.tf-ec2["sonarqube"].private_ip 
+    },
+    docker_dev = {
+      public_ip = aws_instance.tf-ec2["docker-dev"].public_ip
+      private_ip = aws_instance.tf-ec2["docker-dev"].private_ip 
     }
   }
 

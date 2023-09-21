@@ -1,0 +1,47 @@
+---
+- hosts: docker-dev
+  become: true
+  tasks:
+  - name: Update apt package cache
+    ansible.builtin.apt:
+      update_cache: yes
+  - name: Install Docker
+    ansible.builtin.apt:
+      name: docker.io
+      state: present
+  - name: Add user 'ubuntu' to the docker group
+    ansible.builtin.user:
+      name: ubuntu
+      groups: docker
+      append: yes
+  - name: Set permissions on /var/run/docker.sock
+    ansible.builtin.file:
+      path: /var/run/docker.sock
+      mode: '0777'
+  - name: Create user 'maha'
+    ansible.builtin.user:
+      name: maha
+      createhome: yes
+      shell: /bin/bash
+      system: no  # Set to 'no' to create a regular user
+      state: present
+  - name: Set the password for user 'maha'
+    ansible.builtin.user:
+      name: maha
+      password: "{{ 'Gcp@2023' | password_hash('sha512') }}"
+  - name: Enable password authentication in SSH
+    ansible.builtin.lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#?PasswordAuthentication'
+      line: 'PasswordAuthentication yes'
+      backup: yes
+  - name: Restart SSH service
+    ansible.builtin.service:
+      name: ssh
+      state: restarted
+  - name: Add 'maha' to the sudoers file
+    ansible.builtin.lineinfile:
+      path: /etc/sudoers
+      insertafter: EOF
+      line: 'maha ALL=(ALL:ALL) ALL'
+      validate: 'visudo -cf %s'

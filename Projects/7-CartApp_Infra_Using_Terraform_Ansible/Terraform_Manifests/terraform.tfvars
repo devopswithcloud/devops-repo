@@ -24,4 +24,9 @@ instances_configs = {
         instance_type = "t3.medium" 
         key_name = "project-key"
     }
+    docker-dev = {
+        amiid = "ami-053b0d53c279acc90"
+        instance_type = "t3.medium" 
+        key_name = "project-key"
+    }
 }

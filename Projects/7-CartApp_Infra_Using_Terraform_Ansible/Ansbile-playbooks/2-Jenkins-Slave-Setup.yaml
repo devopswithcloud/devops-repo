@@ -39,3 +39,19 @@
     command: mv /opt/jdk-17.0.2 /opt/jdk17
     args: 
       creates: /opt/jdk17
+  - name: Update apt package cache
+    ansible.builtin.apt:
+      update_cache: yes
+  - name: Install Docker
+    ansible.builtin.apt:
+      name: docker.io
+      state: present
+  - name: Add user 'ubuntu' to the docker group
+    ansible.builtin.user:
+      name: ubuntu
+      groups: docker
+      append: yes
+  - name: Set permissions on /var/run/docker.sock
+    ansible.builtin.file:
+      path: /var/run/docker.sock
+      mode: '0777'
