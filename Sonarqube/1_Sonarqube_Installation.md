@@ -47,6 +47,7 @@ mvn --version
 ```bash
 wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.7.1.62043.zip
 yum install unzip -y
+unzip sonarqube-9.7.1.62043.zip
 mv sonarqube-9.7.1.62043 sonarqube-9.7
 ```
 * Sonar will not be executed with `root` user
