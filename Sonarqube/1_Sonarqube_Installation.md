@@ -45,9 +45,9 @@ mvn --version
 ## Installing Sonarqube 
 * For historical downloads [Refer Here](https://www.sonarsource.com/products/sonarqube/downloads/historical-downloads/)
 ```bash
-wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.7.1.62043.zip
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.3.79811.zip
 yum install unzip -y
-mv sonarqube-9.7.1.62043 sonarqube-9.7
+mv sonarqube-9.9.3.79811 sonarqube-9.9
 ```
 * Sonar will not be executed with `root` user
 * We need to create a user called as `sonar` and start the applicaiton with that user 
