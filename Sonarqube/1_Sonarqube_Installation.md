@@ -9,6 +9,7 @@ gcloud compute instances create sonarqube  --zone=us-west4-b --machine-type=e2-m
 # https://techviewleo.com/install-java-openjdk-on-rocky-linux-centos/
 # Install Openjdk 17
 sudo yum -y install wget curl
+cd /opt/
 wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
 tar xvf openjdk-17.0.2_linux-x64_bin.tar.gz
 sudo mv jdk-17.0.2/ /opt/jdk-17/
