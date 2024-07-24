@@ -76,6 +76,47 @@ source /etc/profile.d/maven.sh
 
 # Install/Configure Nexus 
 
+# Download Nexus 
+# TO get latest version use the below url
+# https://help.sonatype.com/repomanager3/product-information/download/download-archives---repository-manager-3
+wget https://download.sonatype.com/nexus/3/nexus-3.45.0-01-unix.tar.gz
+tar -xzvf nexus-3.45.0-01-unix.tar.gz
+mv nexus-3.45.0-01 /opt/nexus
+
+# Create a nexus user.
+# Nexus is not advised to run nexus service as a root user.
+# So, we are creating a  user called nexus and grant sudo access to manage nexus services.
+useradd nexus
+
+#Give the sudo access to nexus user
+
+visudo
+nexus ALL=(ALL) NOPASSWD: ALL
+
+#Change the owner and group permissions to /opt/nexus directory
+chown -R nexus:nexus /opt/nexus
+chmod -R 775 /opt/nexus
+#Change the owner and group permissions to /opt/sonatype-work directory.
+chown -R nexus:nexus /opt/sonatype-work
+chmod -R 775 /opt/sonatype-work
+
+#Open /opt/nexus/bin/nexus.rc file and  uncomment run_as_user parameter and set as nexus user.
+vi /opt/nexus/bin/nexus.rc
+run_as_user="nexus"
+
+#Create nexus as a service
+ln -s /opt/nexus/bin/nexus /etc/init.d/nexus
+
+#Switch as a nexus user and start the nexus service as follows.
+sudo su - nexus
+
+#Enable the nexus services
+sudo systemctl enable nexus
+
+#Start the nexus service
+sudo systemctl start nexus
+
+
 # Access Nexus Repo
 ```
 
