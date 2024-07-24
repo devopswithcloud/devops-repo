@@ -54,6 +54,31 @@ sudo systemctl start nexus
 ```
 * Access the Nexus server from at `http://IPAddress/Hostname:8081/`
 
+## Installing Nexus on Ubuntu
+```bash
+# Install Java 
+apt install openjdk-8-jdk -y
+
+# COnfigure Maven 
+
+wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
+tar xvf openjdk-17.0.2_linux-x64_bin.tar.gz
+sudo mv jdk-17.0.2/ /opt/jdk-17/
+
+vi /etc/profile.d/maven.sh
+export JAVA_HOME=/opt/jdk-17
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:/opt/apache-maven-3.8.8/bin
+export M2_HOME=/opt/apache-maven-3.8.8
+
+chmod +x /etc/profile.d/maven.sh
+source /etc/profile.d/maven.sh 
+
+# Install/Configure Nexus 
+
+# Access Nexus Repo
+```
+
 ### Login to Nexus 
 ```bash
 # Admin user password is located in 
