@@ -141,3 +141,7 @@ To ensure that Java and Maven are available to all users, follow these steps:
 * `conf` => Configuration file, min important file called `settings.xml`
 * `lib` => it contains all jar files
 * `boot` => will help in runtime
+
+# https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html
+mvn archetype:generate -DgroupId=com.sivaacademy.app -DartifactId=my-maven-app -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false
+# mvn compile > mvn package
