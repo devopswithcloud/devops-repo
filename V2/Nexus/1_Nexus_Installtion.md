@@ -67,11 +67,10 @@ cd /opt
 wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
 tar xvf openjdk-17.0.2_linux-x64_bin.tar.gz
 
-# COnfigure Maven 
-
-wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
-tar xvf openjdk-17.0.2_linux-x64_bin.tar.gz
-sudo mv jdk-17.0.2/ /opt/jdk-17/
+# Configure Maven 
+cd /opt
+wget https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+tar -xzvf apache-maven-3.8.8-bin.tar.gz
 
 vi /etc/profile.d/maven.sh
 export JAVA_HOME=/opt/jdk-17
