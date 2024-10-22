@@ -56,6 +56,9 @@ sudo systemctl start nexus
 
 ## Installing Nexus on Ubuntu
 ```bash
+# update repo
+apt update -y
+
 # Install Java 
 apt install openjdk-8-jdk -y
 
