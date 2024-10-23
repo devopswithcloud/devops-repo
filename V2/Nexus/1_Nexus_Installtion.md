@@ -128,6 +128,8 @@ sudo systemctl start nexus
 ```
 
 ### Login to Nexus 
+public ip of your VM:8081 
+eg: http://34.93.111.152:8081/
 ```bash
 # Admin user password is located in 
 /opt/sonatype-work/nexus3/admin.password
