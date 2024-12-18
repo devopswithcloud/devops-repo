@@ -1,0 +1,1 @@
+* Refer [here](https://github.com/devopswithcloud/terraform-d5) for all terraform code
