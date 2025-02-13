@@ -1,5 +1,9 @@
 # Building and Packaging Java Code
 
+## What is Maven ?
+- Maven is a OpenSource java based build tool.
+- Initally it is been developed by Sun Microsystems, later acquired by Oracle.
+
 ### Introduction:
 - Developers write code, but that code must be converted into a packaged format before delivering it to customers or deploying it to servers.
 - In this section, we’ll understand how to build and package Java code.
