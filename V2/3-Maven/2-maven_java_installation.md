@@ -75,12 +75,6 @@ Edit the SSH configuration file to allow password authentication and disable roo
    ```bash
    tar -xzvf apache-maven-3.8.8-bin.tar.gz
    ```
-
-3. Move the extracted Maven directory:
-   ```bash
-   sudo mv apache-maven-3.8.8 /opt/apache-maven-3.8.8
-   ```
-
 ---
 
 ## 5. Set Up Environment Variables
