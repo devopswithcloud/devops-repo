@@ -1,4 +1,4 @@
-## 3. Install OpenJDK 17
+## 1. Install OpenJDK 17
 
 1. Navigate to the `/opt` directory and download OpenJDK 17:
    ```bash
@@ -19,7 +19,7 @@
 
 ---
 
-## 4. Install Maven 3.8.8
+## 2. Install Maven 3.8.8
 
 1. Download Maven 3.8.8:
    ```bash
@@ -33,7 +33,7 @@
    ```
 ---
 
-## 5. Set Up Environment Variables
+## 3. Set Up Environment Variables
 
 To ensure that Java and Maven are available to all users, follow these steps:
 
@@ -57,7 +57,7 @@ To ensure that Java and Maven are available to all users, follow these steps:
 
 ---
 
-## 6. Verify the Installation
+## 4. Verify the Installation
 
 1. To check if Java is correctly installed, run:
    ```bash
@@ -84,3 +84,37 @@ To ensure that Java and Maven are available to all users, follow these steps:
    ```
 
 ---
+
+## 5 Installing Sonarqube 
+* For historical downloads [Refer Here](https://www.sonarsource.com/products/sonarqube/downloads/historical-downloads/)
+```bash
+wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.3.79811.zip
+apt install unzip -y
+unzip sonarqube-9.9.3.79811.zip
+mv sonarqube-9.9.3.79811 sonarqube-9.9
+```
+* Sonar will not be executed with `root` user
+* We need to create a user called as `sonar` and start the applicaiton with that user 
+```bash
+useradd sonar
+
+#visudo
+sonar           ALL=(ALL)       NOPASSWD: ALL
+chown -R sonar:sonar /opt/sonarqube-9.9
+chmod -R 775 /opt/sonarqube-9.9
+
+# Switch user to sonar
+su - sonar
+cd /opt/sonarqube-9.9
+cd bin
+cd linux-x86-64/
+sh sonar.sh start
+
+# To Verify status of sonarqube
+sh sonar.sh status
+```
+* Once the installation is successful, sonarqube can be acessible at port `9000`
+* Make sure your firewalls are opened (if aws its security groups, if gcp its firewalls)
+* It will ask for userid/passwd.
+  * By default sonarqube has created as userid as `admin` and password as `admin`
+  * Popup appears to change the password. Do change it and makesure u remember the password, as its difficult to get it back.
