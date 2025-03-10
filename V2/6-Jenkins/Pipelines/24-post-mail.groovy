@@ -1,6 +1,6 @@
 // Send a mail based on the status of the job 
 
-pipleline {
+pipeline {
     agent any 
     stages {
         stage ('Build') {
