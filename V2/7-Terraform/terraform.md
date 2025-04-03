@@ -1,1 +1,1 @@
-* Refer [here](https://github.com/devopswithcloud/terraform-d5) for all terraform code
+* Refer [here](https://github.com/devopswithcloud/terraform-devops) for all terraform code
