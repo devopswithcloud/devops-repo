@@ -1,0 +1,73 @@
+# ------------------------------------------- List of Modules ---------------------------------------
+# file 
+# apt
+# get_url
+# unarchive
+# ansible.builtin.user
+# ansible.builtin.lineinfile
+# ansible.builtin.file
+---
+- name: Install Configure and Start Nexus 
+  become: yes
+  hosts: all
+  # vars:
+  # - nexus_folder: ****
+  tasks:
+  # Step1: Create Custom Directories
+  - name: Create directories for Nexus
+    ansible.builtin.file:
+      state: directory
+      mode: 0775
+      path: "{{ item.dest }}"
+    loop:
+    - { dest: '/opt/nexus_software', message: Nexus Folder Created}
+    - { dest: '/opt/siva', message: Siva Folder Created}
+  # Step2: Installing Openjdk
+  - name: Install Openjdk
+    ansible.builtin.apt:
+      name: openjdk-8-jdk
+      state: present 
+      update_cache: yes 
+  # Step3: Download Nexus Software 
+  - name: Download Nexus Software 
+    ansible.builtin.get_url:
+      url: https://download.sonatype.com/nexus/3/nexus-3.45.0-01-unix.tar.gz
+      dest: /opt/nexus_software
+  # Step4: Unarchive the Nexus tar file
+  - name: Unarchive Nexus file
+    ansible.builtin.unarchive:
+      src: /opt/nexus_software/nexus-3.45.0-01-unix.tar.gz
+      dest: /opt
+      remote_src: yes
+  # Step5: Create the nexus User 
+  - name: Create Nexus user
+    ansible.builtin.user:
+      name: nexus 
+      state: present 
+      create_home: yes 
+  # Step6: Add nexus user to sudoers file, for password less authentication
+  - name: Add nexus user to sudoers
+    ansible.builtin.lineinfile:
+      path: /etc/sudoers 
+      state: present
+      line: 'nexus ALL=(ALL) NOPASSWD: ALL'
+  # Step7: Change ownership and permissions for Nexus
+  - name: Change ownership and permissions for Nexus 
+    ansible.builtin.file:
+      path: "{{ item.dest }}"
+      owner: nexus
+      group: nexus
+      recurse: yes 
+      mode: 0775
+    loop:
+    - { dest: '/opt/nexus-3.45.0-01'}
+    - { dest: '/opt/sonatype-work'}
+
+
+# # Tasks to be performed:
+# update the nexus.rc 
+# create a link to nexus 
+# start and enable nexus 
+
+
+# print the /opt/sonatype-work/nexus3/admin.password
