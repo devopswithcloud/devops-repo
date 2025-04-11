@@ -1,0 +1,13 @@
+[Unit]
+Description=Nexus Service
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/etc/init.d/nexus start
+ExecStop=/etc/init.d/nexus stop
+User=nexus
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
