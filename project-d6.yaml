@@ -1,0 +1,9 @@
+Projects:
+1) Create a Jenkins-master through terraform 
+2) Create a ansible controller through terraform 
+3) Install ansible on the ansible-controller using terraform only 
+4) Create a jenkins-slave machine using terraform 
+5) Install and configure java on the jenkins-master using ansible 
+6) Install and configure java, maven, node on the Jenkins-slave using ansible 
+7) Create a sonar-vm through terraform 
+8) Install and configure sonar on the sonar-vm through ansible 
