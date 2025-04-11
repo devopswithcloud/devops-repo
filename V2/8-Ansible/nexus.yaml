@@ -1,73 +1,91 @@
-# ------------------------------------------- List of Modules ---------------------------------------
-# file 
+#------------------------------------- List of modules ----------------------------------
+# file
 # apt
 # get_url
 # unarchive
-# ansible.builtin.user
-# ansible.builtin.lineinfile
-# ansible.builtin.file
----
-- name: Install Configure and Start Nexus 
+# user
+# lineinfile
+# replace
+# template
+# command 
+--- 
+- name: Install configure and start nexus
   become: yes
   hosts: all
-  # vars:
-  # - nexus_folder: ****
+  gather_facts: yes
   tasks:
-  # Step1: Create Custom Directories
+  # Step1: Create Custom directories
   - name: Create directories for Nexus
     ansible.builtin.file:
+      path: "{{ item.dest }}"
       state: directory
       mode: 0775
-      path: "{{ item.dest }}"
     loop:
-    - { dest: '/opt/nexus_software', message: Nexus Folder Created}
-    - { dest: '/opt/siva', message: Siva Folder Created}
-  # Step2: Installing Openjdk
-  - name: Install Openjdk
+    - { dest: '/opt/nexus_software', message: nexus folder created}
+    - { dest: '/opt/siva', message: siva folder created}
+  # Step2: Install Openjdk8
+  - name: Install openjdk 8
     ansible.builtin.apt:
       name: openjdk-8-jdk
-      state: present 
-      update_cache: yes 
-  # Step3: Download Nexus Software 
-  - name: Download Nexus Software 
+      state: present
+      update_cache: yes
+  # Step3: Download Nexus software
+  - name: Download Nexus Software
     ansible.builtin.get_url:
       url: https://download.sonatype.com/nexus/3/nexus-3.45.0-01-unix.tar.gz
       dest: /opt/nexus_software
-  # Step4: Unarchive the Nexus tar file
-  - name: Unarchive Nexus file
+  # Step4: Unarchive the nexus tar
+  - name: Unarchive nexus
     ansible.builtin.unarchive:
       src: /opt/nexus_software/nexus-3.45.0-01-unix.tar.gz
       dest: /opt
       remote_src: yes
-  # Step5: Create the nexus User 
-  - name: Create Nexus user
+  # Step5: Create the nexus user
+  - name: Create Nexus User
     ansible.builtin.user:
-      name: nexus 
-      state: present 
+      name: nexus
+      state: present
       create_home: yes 
-  # Step6: Add nexus user to sudoers file, for password less authentication
+  # Step6: Add nexus user to sudoers file, for password less authentication 
   - name: Add nexus user to sudoers
     ansible.builtin.lineinfile:
-      path: /etc/sudoers 
+      path: /etc/sudoers
       state: present
       line: 'nexus ALL=(ALL) NOPASSWD: ALL'
-  # Step7: Change ownership and permissions for Nexus
-  - name: Change ownership and permissions for Nexus 
+      validate: /usr/sbin/visudo -cf %s 
+  # Step7: Change Ownership and permissions for Nexus directories
+  - name: Change Ownership and permissions for Nexus
     ansible.builtin.file:
       path: "{{ item.dest }}"
       owner: nexus
       group: nexus
-      recurse: yes 
       mode: 0775
+      recurse: true # this will make the contents inside the below folder to nexus user
     loop:
     - { dest: '/opt/nexus-3.45.0-01'}
     - { dest: '/opt/sonatype-work'}
-
-
-# # Tasks to be performed:
-# update the nexus.rc 
-# create a link to nexus 
-# start and enable nexus 
-
-
-# print the /opt/sonatype-work/nexus3/admin.password
+  # Step8: Update the nexus.rc file to run as a nexus user
+  - name: Update nexus.rc file 
+    ansible.builtin.replace:
+      path: /opt/nexus-3.45.0-01/bin/nexus.rc
+      regexp: '^#run.*$'
+      replace: 'run_as_user="nexus"'
+      backup: yes
+  # Step9: Create link to nexus service script
+  - name: Create a symbolic link for nexus service
+    ansible.builtin.file:
+      src: /opt/nexus-3.45.0-01/bin/nexus
+      dest: /etc/init.d/nexus
+      state: link
+  # Step 10: Create systemd service file for Nexus (optional but recommended)
+  - name: Copy Nexus systemd service file
+    ansible.builtin.template:
+      src: nexus.service  # Ensure you have a nexus.service file ready in your folder
+      dest: /etc/systemd/system/nexus.service
+  # Step 11: Reload systemd and start Nexus service
+  - name: Start and enable Nexus service
+    ansible.builtin.service:
+      name: nexus
+      enabled: yes
+      state: started
+      daemon_reload: true
