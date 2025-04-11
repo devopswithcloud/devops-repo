@@ -6,8 +6,10 @@
 # user
 # lineinfile
 # replace
-# template
+# template 
 # command 
+# debug
+# register
 --- 
 - name: Install configure and start nexus
   become: yes
@@ -89,3 +91,18 @@
       enabled: yes
       state: started
       daemon_reload: true
+  # Step12: Retrieve and print the nexus admin password
+  - name: Retrieve Nexus admin password
+    ansible.builtin.command: cat /opt/sonatype-work/nexus3/admin.password
+    register: nexus_admin_password
+  # Step13: Print the Nexus password
+  - name: Print the nexus password
+    debug:
+      msg: "The Nexus Admin Password is {{ nexus_admin_password.stdout }}"
+
+
+
+
+
+
+
