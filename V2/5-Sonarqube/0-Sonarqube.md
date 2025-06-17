@@ -1,3 +1,7 @@
+## What is SonarQube?
+* SonarQube is an open-source platform for continuous inspection of code quality.
+* It helps DevOps and developer teams detect bugs, vulnerabilities, code smells, and security hotspots early in the development lifecycle.
+
 ## Code Coverage 
 * As a devleopere, the teams will be writing source code, and we need to tet the source code programatically. 
 * To test the src code programatically the developes will write unit test cases. 
