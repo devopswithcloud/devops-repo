@@ -65,15 +65,15 @@ Edit the SSH configuration file to allow password authentication and disable roo
 
 ## 4. Install Maven 3.8.8
 
-1. Download Maven 3.8.8:
+1. Download Maven 3.8.9:
    ```bash
    cd /opt
-   wget https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+   wget https://dlcdn.apache.org/maven/maven-3/3.8.9/binaries/apache-maven-3.8.9-bin.tar.gz
    ```
 
 2. Extract the Maven archive:
    ```bash
-   tar -xzvf apache-maven-3.8.8-bin.tar.gz
+   tar -xzvf apache-maven-3.8.9-bin.tar.gz
    ```
 ---
 
