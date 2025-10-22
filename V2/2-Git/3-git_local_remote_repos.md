@@ -42,4 +42,3 @@ A **remote repository** is a version of your project stored on a server or servi
 
 ---
 
-This concludes the explanation of **local repositories** and **why remote repositories are important**. We’ll move to creating a GitHub account and linking repositories when you're ready!
