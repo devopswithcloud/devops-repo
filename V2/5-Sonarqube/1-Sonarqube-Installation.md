@@ -24,12 +24,12 @@
 1. Download Maven 3.8.8:
    ```bash
    cd /opt
-   wget https://dlcdn.apache.org/maven/maven-3/3.8.8/binaries/apache-maven-3.8.8-bin.tar.gz
+   wget https://dlcdn.apache.org/maven/maven-3/3.8.9/binaries/apache-maven-3.8.9-bin.tar.gz
    ```
 
 2. Extract the Maven archive:
    ```bash
-   tar -xzvf apache-maven-3.8.8-bin.tar.gz
+   tar -xzvf apache-maven-3.8.9-bin.tar.gz
    ```
 ---
 
@@ -118,3 +118,4 @@ sh sonar.sh status
 * It will ask for userid/passwd.
   * By default sonarqube has created as userid as `admin` and password as `admin`
   * Popup appears to change the password. Do change it and makesure u remember the password, as its difficult to get it back.
+
